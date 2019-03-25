@@ -1,0 +1,28 @@
+Oyster Genome, indexing etc. 
+
+Genomic .fna , gff files were downloaded at ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/297/895/GCF_000297895.1_oyster_v9
+  C.gigas.fna
+  C.gigas.gtf(3)
+
+To supply a GTF file for hisat2_extract_exon/splice sites: 
+
+$module load cufflinks. 
+$gffread C.gigas.gff -g C.gigas.fna -T -o C.gigas.gtf (-T to output gtf file)
+  No fasta index found for C.gigas.fna. Rebuilding, please wait..
+  Fasta index rebuilt.
+  
+Output given: 
+-- C.gigas.fna.fai
+-- C.gigas.gtf
+  
+Splice/Exon sites:
+
+$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_splice_sites.py C.gigas.gtf > C.gigas_splice_sites.txt
+$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_exons.py C.gigas.gtf > C.gigas_exon_sites.txt
+
+Building Genome index:
+
+$HISAT2/hisat2-build --ss C.gigas_splice_sites.txt --exon C.gigas_exon_sites.txt -f C.gigas.fna C.gigas
+--C.gigas.1.ht2
+..
+--C.gigas.8.ht2
