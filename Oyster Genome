@@ -26,3 +26,15 @@ $HISAT2/hisat2-build --ss C.gigas_splice_sites.txt --exon C.gigas_exon_sites.txt
 --C.gigas.1.ht2
 ..
 --C.gigas.8.ht2
+
+
+#tested other GTF method to be sure, biostars poster giving me paranoia - https://www.biostars.org/p/45791/#371301
+
+Using conda on local machine : 
+$conda install -c bioconda ucsc-gff3togenepred 
+$conda install -c bioconda ucsc-genepredtogtf 
+
+barrys-mbp:New Desktop barrydigby$ /Users/barrydigby/anaconda/bin/gff3ToGenePred C.gigas.gff C.gigas.genePred
+
+
+
