@@ -4,3 +4,12 @@ https://www.ncbi.nlm.nih.gov/nuccore/AY509253.2?report=gbwithparts&log$=seqview
 building index using bowtie(1) for miRDeep
 
 /home/bdigby/bin/bowtie-1.2.2-linux-x86_64/bowtie-build OsHV-1.fasta OsHV_index
+
+
+##annotation##
+
+module load perl/5.20.1 on cluster. 
+
+acts as executable = $ bp_genbank2gff3.pl OsHV-1.gbk 
+
+outputs gff3 file. 
