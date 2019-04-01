@@ -2,9 +2,32 @@ Oyster Genome, indexing etc.
 
 Genomic .fna , gff files were downloaded at ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/297/895/GCF_000297895.1_oyster_v9
   C.gigas.fna
-  C.gigas.gtf(3)
+  C.gigas.gff(3)
 
 To supply a GTF file for hisat2_extract_exon/splice sites: 
+Using conda on local machine, (hangs on solving env / so made a new one) : 
+$conda install -c bioconda ucsc-gff3togenepred 
+$conda install -c bioconda ucsc-genepredtogtf 
+
+barrys-mbp:New Desktop barrydigby$ /Users/barrydigby/anaconda/bin/gff3ToGenePred C.gigas.gff C.gigas.genePred
+barrys-mbp:New Desktop barrydigby$ /Users/barrydigby/anaconda/envs/UCSC/bin/genePredToGtf file C.gigas.genePred C.gigas.gtf
+
+Splice/Exon sites:
+
+$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_splice_sites.py C.gigas.gtf > splice_sites.ss
+$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_exons.py C.gigas.gtf > exon_sites.exon
+
+Building Genome index:
+
+$HISAT2/hisat2-build -p 4 --ss splice_sites.ss --exon exon_sites.exon -f C.gigas.fna index
+--index.1.ht2
+..
+--index.8.ht2
+
+### used cufflinks / gffread too. see biostars -E -T -O -F 
+### i decided not to go forward with this, the resulting exon sites file were different sizes, comparing the gffread method
+### vs the genepred -> gtf method. stuck to owen donoghues way of doing things code used is below if needed in future. 
+
 
 $module load cufflinks. 
 $gffread C.gigas.gff -g C.gigas.fna -T -o C.gigas.gtf (-T to output gtf file)
@@ -15,26 +38,5 @@ Output given:
 -- C.gigas.fna.fai
 -- C.gigas.gtf
   
-Splice/Exon sites:
-
-$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_splice_sites.py C.gigas.gtf > C.gigas_splice_sites.txt
-$python /home/bdigby/bin/hisat2-2.1.0/hisat2_extract_exons.py C.gigas.gtf > C.gigas_exon_sites.txt
-
-Building Genome index:
-
-$HISAT2/hisat2-build --ss C.gigas_splice_sites.txt --exon C.gigas_exon_sites.txt -f C.gigas.fna C.gigas
---C.gigas.1.ht2
-..
---C.gigas.8.ht2
-
-
-#tested other GTF method to be sure, biostars poster giving me paranoia - https://www.biostars.org/p/45791/#371301
-
-Using conda on local machine : 
-$conda install -c bioconda ucsc-gff3togenepred 
-$conda install -c bioconda ucsc-genepredtogtf 
-
-barrys-mbp:New Desktop barrydigby$ /Users/barrydigby/anaconda/bin/gff3ToGenePred C.gigas.gff C.gigas.genePred
-
 
 
