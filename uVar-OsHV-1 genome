@@ -1,3 +1,7 @@
 fasta, gbk downloaded at:
 https://www.ncbi.nlm.nih.gov/nuccore/KY242785
 
+indexing the genome for miRDeep package requires bowtie !! bowtie, not bowtie2
+
+/home/bdigby/bin/bowtie-1.2.2-linux-x86_64/bowtie-build uVar-OsHV-1.fasta uVar_index
+
