@@ -1,0 +1,8 @@
+Convert small_RNA.fastq to fasta:
+>/home/bdigby/bin/fastx_toolkit/fastq_to_fasta -Q33 -i small_RNA_trimmed.fastq -o small_RNA.fasta
+
+Collapse Reads:
+>/home/bdigby/bin/fastx_toolkit/fastx_collapser -i small_RNA.fasta -o small_RNA_collapsed.fasta
+
+mapper.pl can do above using the -h (parse to fasta) and -m (collapse) options if fastx unavailable
+>
