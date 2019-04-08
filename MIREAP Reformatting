@@ -1,7 +1,7 @@
 Required files for mireap : 
 mireap.pl -i <smrna.fa> -m <map.txt> -r <reference.fa> -o <outdir>
 
-The map.txt file can be generated from the mapping.arf file:
+The map.txt file can be generated from the mapping.arf file (mapper.pl miRDeep2)
 > awk '{print $1'\t'$6'\t'$8'\t'$9'\t'$11}' mapping.arf > map.txt
 
 Containing read_ID, chr_ID, start, end, strand(+/-). 
@@ -84,4 +84,6 @@ MIREAP WAS RUN LOCALLY
 
 ######################
 
+> mireap.pl -i AY509253.2_collapsed.fa -m AY509253.2_map.txt -r AY509253.2.fa -A 17 -t AY509253.2 -o ./AY509253.2
 
+-A change min miRNA seq length from 18 to 17. 
