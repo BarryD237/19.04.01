@@ -5,4 +5,12 @@ Collapse Reads:
 >/home/bdigby/bin/fastx_toolkit/fastx_collapser -i small_RNA.fasta -o small_RNA_collapsed.fasta
 
 mapper.pl can do above using the -h (parse to fasta) and -m (collapse) options if fastx unavailable
->
+>smRNA=/data4/bdigby/data/19.04.01/small_RNA/small_RNA_trimmed.fastq
+
+>mapper.pl $smRNA -e -h -l 17 -p AY509253.2_index -m -s AY509253.2_collapsed.fa -t AY509253.2_mapped.arf -v
+
+miRDeep2:
+
+>miRDeep2.pl AY509253.2_collapsed.fa AY509253.2.fa AY509253.2_mapped.arf none none none 2> AY509253.2.log
+
+This was done for all 6 herpesvirus genomes.
