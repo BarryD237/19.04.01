@@ -1,0 +1,11 @@
+Download Genome, Genbank from NCBI. 
+
+module load perl/5.20.1
+
+$bp_genbank2gff3.pl [ACC.no].gbk 
+
+On local source activate UCSC
+
+$gfftogenePred [ACC.no].gff [ACC.no].genePred
+
+$genePredtoGTF file [ACC.no].genePred [ACC.no].gtf
