@@ -1,0 +1,22 @@
+Per Owen Donohue: small RNA reads are Single End, 75bp length, strand-specific, sense orientation.
+
+Sense orientation: 5' -> 3' (as annotated)
+
+--rna-strandness <string> use F: 'F' means a read corresponds to a transcript. 
+(not R: 'R' means a read corresponds to the reverse complemented counterpart of a transcript.)
+
+--dta reports alignments tailored for transcript assemblers (Required for Stringtie transcript assembler). 
+
+hisat-build AY509253.2.fa AY509253.2_hisat
+
+####################
+
+hisat2=/home/bdigby/bin/hisat2-2.1.0/hisat2
+
+smRNA=/data4/bdigby/data/19.04.01/small_RNA/small_RNA_trimmed.fastq
+
+$hisat2 --dta --rna-strandness F -q -x AY509253.2_hisat $smRNA -S AY509253.2.sam
+
+samtools view -Sb -o AY509253.2.bam AY509253.2.sam
+
+samtools sort AY509253.2.bam AY509253.2.sorted
