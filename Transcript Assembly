@@ -1,0 +1,63 @@
+Script run at top of tree containing each genomes hisat2 dir
+
+#!/bin/bash
+
+# Your job name
+#$ -N Stringtie
+
+# The job should be placed into the queue 'all.q'
+#$ -q all.q
+
+# Running in the current directory
+#$ -cwd
+
+# Export some necessary environment variables
+#$ -v PATH
+#$ -v LD_LIBRARY_PATH
+#$ -v PYTHONPATH
+#$ -S /bin/bash
+
+stringtie=/home/bdigby/bin/stringtie-1.3.5/stringtie
+
+AYbam=/data4/bdigby/data/19.04.01/hisat2/AY509253.2/AY509253.2_sorted.bam
+AYgtf=/data4/bdigby/data/19.04.01/annotations/AY509253.2/AY509253.2.gtf
+
+KPbam=/data4/bdigby/data/19.04.01/hisat2/KP412538.1/KP412538.1.sorted.bam
+KPgtf=/data4/bdigby/data/19.04.01/annotations/KP412538.1/KP412538.1.gtf
+
+KY24bam=/data4/bdigby/data/19.04.01/hisat2/KY242785.1/KY242785.1.sorted.bam
+KY24gtf=/data4/bdigby/data/19.04.01/annotations/KY242785.1/KY242785.1.gtf
+
+KY27bam=/data4/bdigby/data/19.04.01/hisat2/KY271630.1/KY271630.1.sorted.bam
+KY27gtf=/data4/bdigby/data/19.04.01/annotations/KY271630.1/KY271630.1.gtf
+
+MFbam=/data4/bdigby/data/19.04.01/hisat2/MF509813.1/MF509813.1.sorted.bam
+MFgtf=/data4/bdigby/data/19.04.01/annotations/MF509813.1/MF509813.1.gtf
+
+MGbam=/data4/bdigby/data/19.04.01/hisat2/MG561751.2/MG561751.2.sorted.bam
+MGgtf=/data4/bdigby/data/19.04.01/annotations/MG561751.2/MG561751.2.gtf
+
+$stringtie $AYbam -G $AYgtf --rf -l AY509253.2 -v -p 4 -t -c 0.1 -g 2 -o ./AY509253.2/ref_guided/AY509253.2_refguided.gtf
+$stringtie $AYbam --rf -l AY509253.2 -v -p 4 -t -c 0.1 -g 2 -o ./AY509253.2/de_novo/AY509253.2_denovo.gtf
+
+$stringtie $KPbam -G $KPgtf --rf -l KP412538.1 -v -p 4 -t -c 0.1 -g 2 -o ./KP412538.1/ref_guided/KP412538.1_refguided.gtf
+$stringtie $KPbam --rf -l KP412538.1 -v -p 4 -t -c 0.1 -g 2 -o ./KP412538.1/de_novo/KP412538.1_denovo.gtf
+
+$stringtie $KY24bam -G $KY24gtf --rf -l KY242785.1 -v -p 4 -t -c 0.1 -g 2 -o ./KY242785.1/ref_guided/KY242785.1_refguided.gtf
+$stringtie $KY24bam --rf -l KY242785.1 -v -p 4 -t -c 0.1 -g 2 -o ./KY242785.1/de_novo/KY242785.1_denovo.gtf
+
+$stringtie $KY27bam -G $KY27gtf --rf -l KY271630.1 -v -p4 -t -c 0.1 -g 2 -o ./KY271630.1/ref_guided/KY271630.1_refguided.gtf
+$stringtie $KY27bam --rf -l KY271630.1 -v -p 4 -t -c 0.1 -g 2 -o ./KY271630.1/de_novo/KY271630.1_denovo.gtf
+
+$stringtie $MFbam -G $MFgtf --rf -l MF509813.1 -v -p 4 -t -c 0.1 -g 2 -o ./MF509813.1/ref_guided/MF509813.1_refguided.gtf
+$stringtie $MFbam --rf -l MF509813.1 -v -p 4 -t -c 0.1 -g 2 -o ./MF509813.1/de_novo/MF509813.1_denovo.gtf
+
+$stringtie $MGbam -G $MGgtf --rf -l MG561751.2 -v -p 4 -t -c 0.1 -g 2 -o ./MG561751.2/ref_guided/MG561751.2_refguided.gtf
+$stringtie $MGbam --rf -l MG561751.2 -v -p4 -t -c 0.1 -g 2 -o ./MG561751.2/de_novo/MG561751.2_denovo.gtf
+
+
+--rf assume fr-firststrand library 
+-t disables transcript trimming
+-c sets minimum read coverage allowed for predicted transcripts. transcripts with lower coverage will not be
+    processed. default value is 2.5. 
+-g minimum locus gap sep value. reads closer than this are merged together in output. default 50bp
