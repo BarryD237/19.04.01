@@ -1,10 +1,10 @@
-Download Genome, Genbank from NCBI. 
+Download GFF3 file from NCBI (send to file -> GFF3)
 
-module load perl/5.20.1
+On local source activate UCSC (anaconda virtual env)
 
-$bp_genbank2gff3.pl [ACC.no].gbk 
+Add gff3 header to the file before running
 
-On local source activate UCSC
+##gff-version 3	
 
 $gfftogenePred [ACC.no].gff [ACC.no].genePred
 
