@@ -1,0 +1,8 @@
+header of each ORF sequence is:
+>lcl|KY242785.1_cds_ASK05530.1_1 [protein=ORF1] [protein_id=ASK05530.1] [location=complement(115..561)] [gbkey=CDS]
+
+I want to extract only the loaction in each header, and change to 115-561 (for downstream samtools use)
+
+grep "^>" Coding_Seqs.fasta | awk 'BEGIN { RS="("; FS=")"; } {print $1}' | sed -r 's/[..]+/-/g'
+
+115-561
